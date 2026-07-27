@@ -1,0 +1,24 @@
+{
+  "$schema": "../schemas/experiment.schema.json",
+  "schemaVersion": "1.0.0",
+  "experimentId": "smoke-hover-000",
+  "vehicleProfile": "main_quad",
+  "geometryProfile": "cant_00",
+  "simulationModel": "AC_Quadcopter_Simulation",
+  "initialCondition": "Hover",
+  "durationSec": 10,
+  "command": {
+    "mode": "attitude-altitude",
+    "rollDeg": 0,
+    "pitchDeg": 0,
+    "yawDeg": 0,
+    "altitudeM": 0
+  },
+  "environment": {
+    "windSpeedMps": 0,
+    "windDirectionDeg": 0,
+    "airDensityKgM3": 1.225
+  },
+  "repetition": 1,
+  "notes": "Dependency smoke test; not a calibrated research run."
+}

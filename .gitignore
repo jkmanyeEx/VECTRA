@@ -1,0 +1,61 @@
+# MATLAB local and generated files
+*.asv
+*.autosave
+*.m~
+*.slx.r*
+*.slxc
+*.mex*
+*.mlproj
+*.prj
+*.sldd.rp
+slprj/
+codegen/
+DerivedData/
+
+# Simulink generated/cache files
+*.slxc
+*_ert_rtw/
+*_grt_rtw/
+*.simlog
+
+# Raw and processed research data
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/README.md
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/README.md
+
+# Generated models and results
+models/generated/*
+!models/generated/.gitkeep
+results/figures/*
+!results/figures/.gitkeep
+results/tables/*
+!results/tables/.gitkeep
+results/reports/*
+!results/reports/.gitkeep
+
+# PX4 logs and large sensor recordings
+*.ulg
+*.bin
+*.bag
+*.mcap
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+config/local/
+secrets/
+
+# OS and editor state
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

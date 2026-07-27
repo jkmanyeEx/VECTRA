@@ -1,0 +1,8 @@
+{
+  "name": "QuadSim",
+  "repository": "https://github.com/dch33/Quad-Sim.git",
+  "commit": "961bc69d4939c8d0661eeb9820de668994262f65",
+  "commitDate": "2014-07-13T22:02:35-04:00",
+  "license": "LGPL-3.0-or-later",
+  "localPath": "vendor/QuadSim"
+}

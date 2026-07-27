@@ -1,0 +1,35 @@
+{
+  "$schema": "../schemas/vehicle.schema.json",
+  "schemaVersion": "1.0.0",
+  "vehicleId": "rne-quad-01",
+  "displayName": "R&E Primary Quadcopter",
+  "calibrated": false,
+  "massKg": null,
+  "armLengthM": null,
+  "inertiaKgM2": {
+    "Jxx": null,
+    "Jyy": null,
+    "Jzz": null
+  },
+  "motor": {
+    "count": 4,
+    "thrustCoefficientNPerRpm2": null,
+    "torqueCoefficientNmPerRpm2": null,
+    "throttleToRpmSlope": null,
+    "throttleToRpmIntercept": null,
+    "timeConstantSec": null,
+    "minimumThrottlePercent": null,
+    "maximumRpm": null
+  },
+  "propeller": {
+    "manufacturer": null,
+    "model": null,
+    "diameterIn": null,
+    "pitchIn": null
+  },
+  "battery": {
+    "cellCount": null,
+    "capacityMah": null
+  },
+  "notes": "Populate from measured values before model validation."
+}

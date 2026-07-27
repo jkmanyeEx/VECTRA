@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vectra.local/schemas/geometry.schema.json",
+  "title": "VECTRA rotor geometry profile",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "geometryId",
+    "geometryRevision",
+    "coordinateFrame",
+    "axisMeaning",
+    "motorOrder",
+    "cantType",
+    "nominalCantAngleDeg",
+    "motorCantAnglesDeg",
+    "motorAzimuthsDeg",
+    "motorSpinDirections"
+  ],
+  "properties": {
+    "schemaVersion": {"type": "string"},
+    "geometryId": {"type": "string", "minLength": 1},
+    "geometryRevision": {"type": "string", "minLength": 1},
+    "displayName": {"type": "string"},
+    "coordinateFrame": {"const": "QUADSIM_BODY_XY_ZUP"},
+    "axisMeaning": {"const": "FORCE_ON_BODY"},
+    "motorOrder": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "cantType": {
+      "enum": ["radial-outward", "radial-inward", "tangential", "custom"]
+    },
+    "nominalCantAngleDeg": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "motorCantAnglesDeg": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"type": "number", "minimum": -90, "maximum": 90}
+    },
+    "motorAzimuthsDeg": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"type": "number", "minimum": -360, "maximum": 360}
+    },
+    "motorPositionsBodyM": {
+      "type": ["array", "null"],
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {"type": "number"}
+      }
+    },
+    "customRotorAxesBody": {
+      "type": ["array", "null"],
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {"type": "number"}
+      }
+    },
+    "motorSpinDirections": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"enum": ["CW", "CCW"]}
+    },
+    "measuredMotorCantAnglesDeg": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"type": ["number", "null"], "minimum": -90, "maximum": 90}
+    },
+    "measurementUncertaintyDeg": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"type": "number", "minimum": 0}
+    },
+    "assumptions": {"type": "object"}
+  },
+  "additionalProperties": false
+}

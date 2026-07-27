@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vectra.local/schemas/experiment.schema.json",
+  "title": "VECTRA experiment profile",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "experimentId",
+    "vehicleProfile",
+    "geometryProfile",
+    "durationSec",
+    "command",
+    "environment",
+    "repetition"
+  ],
+  "properties": {
+    "schemaVersion": {"type": "string"},
+    "experimentId": {"type": "string", "minLength": 1},
+    "vehicleProfile": {"type": "string", "minLength": 1},
+    "geometryProfile": {"type": "string", "minLength": 1},
+    "simulationModel": {"type": "string"},
+    "initialCondition": {"type": "string"},
+    "durationSec": {"type": "number", "exclusiveMinimum": 0},
+    "command": {"type": "object"},
+    "environment": {
+      "type": "object",
+      "required": ["windSpeedMps", "windDirectionDeg"],
+      "properties": {
+        "windSpeedMps": {"type": "number", "minimum": 0},
+        "windDirectionDeg": {"type": "number", "minimum": 0, "exclusiveMaximum": 360},
+        "airDensityKgM3": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "repetition": {"type": "integer", "minimum": 1},
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": false
+}

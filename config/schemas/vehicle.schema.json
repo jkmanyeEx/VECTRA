@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vectra.local/schemas/vehicle.schema.json",
+  "title": "VECTRA vehicle profile",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "vehicleId",
+    "calibrated",
+    "massKg",
+    "armLengthM",
+    "inertiaKgM2",
+    "motor"
+  ],
+  "properties": {
+    "schemaVersion": {"type": "string"},
+    "vehicleId": {"type": "string", "minLength": 1},
+    "displayName": {"type": "string"},
+    "calibrated": {"type": "boolean"},
+    "massKg": {"type": ["number", "null"], "exclusiveMinimum": 0},
+    "armLengthM": {"type": ["number", "null"], "exclusiveMinimum": 0},
+    "inertiaKgM2": {
+      "type": "object",
+      "required": ["Jxx", "Jyy", "Jzz"],
+      "properties": {
+        "Jxx": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "Jyy": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "Jzz": {"type": ["number", "null"], "exclusiveMinimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "motor": {
+      "type": "object",
+      "required": ["count"],
+      "properties": {
+        "count": {"const": 4},
+        "thrustCoefficientNPerRpm2": {"type": ["number", "null"], "minimum": 0},
+        "torqueCoefficientNmPerRpm2": {"type": ["number", "null"], "minimum": 0},
+        "throttleToRpmSlope": {"type": ["number", "null"], "minimum": 0},
+        "throttleToRpmIntercept": {"type": ["number", "null"]},
+        "timeConstantSec": {"type": ["number", "null"], "minimum": 0},
+        "minimumThrottlePercent": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maximumRpm": {"type": ["number", "null"], "exclusiveMinimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "propeller": {"type": "object"},
+    "battery": {"type": "object"},
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": false
+}

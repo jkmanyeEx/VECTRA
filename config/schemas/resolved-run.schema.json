@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vectra.local/schemas/resolved-run.schema.json",
+  "title": "VECTRA resolved run configuration",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "createdAt", "vehicle", "geometry", "experiment"],
+  "properties": {
+    "schemaVersion": {"type": "string"},
+    "runId": {"type": "string", "minLength": 1},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "source": {"enum": ["simulation", "flight", "hybrid"]},
+    "vehicle": {"type": "object"},
+    "geometry": {"type": "object"},
+    "experiment": {"type": "object"},
+    "software": {"type": "object"},
+    "hardware": {"type": "object"},
+    "simulation": {"type": "object"}
+  },
+  "additionalProperties": false
+}

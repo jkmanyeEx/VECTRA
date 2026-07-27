@@ -1,0 +1,15 @@
+*.slx binary
+*.mdl binary
+*.mat binary
+*.fig binary
+*.mlapp binary
+*.ulg binary
+*.bin binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.csv text eol=lf
+*.json text eol=lf
+*.m text eol=lf
+*.md text eol=lf

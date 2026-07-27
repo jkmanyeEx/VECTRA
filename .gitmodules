@@ -1,0 +1,3 @@
+[submodule "vendor/QuadSim"]
+	path = vendor/QuadSim
+	url = https://github.com/dch33/Quad-Sim.git

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vectra.local/schemas/telemetry.schema.json",
+  "title": "VECTRA live telemetry profile",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "telemetryId",
+    "transport",
+    "decoder",
+    "dialect",
+    "localPort",
+    "pythonExecutable",
+    "bridgeScript",
+    "pollPeriodSec",
+    "samplePeriodSec",
+    "staleAfterSec"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schemaVersion": {"type": "string"},
+    "telemetryId": {"type": "string", "minLength": 1},
+    "transport": {"const": "udp"},
+    "decoder": {"const": "pymavlink"},
+    "dialect": {"type": "string", "minLength": 1},
+    "localPort": {"type": "integer", "minimum": 1024, "maximum": 65535},
+    "pythonExecutable": {"type": "string", "minLength": 1},
+    "bridgeScript": {"type": "string", "minLength": 1},
+    "pollPeriodSec": {
+      "type": "number",
+      "minimum": 0.01,
+      "maximum": 1
+    },
+    "samplePeriodSec": {"type": "number", "exclusiveMinimum": 0},
+    "staleAfterSec": {"type": "number", "exclusiveMinimum": 0},
+    "lockToFirstPx4Heartbeat": {"type": "boolean"},
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": false
+}

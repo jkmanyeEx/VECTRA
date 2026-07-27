@@ -1,8 +1,8 @@
 function profile = loadProfile(category, profileName)
-%LOADPROFILE Load a named vehicle, geometry, or experiment profile.
+%LOADPROFILE Load a named VECTRA configuration profile.
 
 category = validatestring(string(category), ...
-    ["vehicles", "geometries", "experiments"]);
+    ["vehicles", "geometries", "experiments", "telemetry"]);
 profileName = string(profileName);
 
 if ~endsWith(profileName, ".json")

@@ -11,6 +11,18 @@
 - UAV Toolbox
 - PX4 ULog files recorded by the supported flight controller
 
+## Required for live PX4 telemetry GUI
+
+- Python 3.11 or a verified compatible Python 3 release
+- project-local PyMAVLink environment created by `installPymavlink`
+- QGroundControl or another documented MAVLink router
+- a one-way UDP MAVLink stream to the configured VECTRA listener
+- default VECTRA endpoint `127.0.0.1:14551`
+
+Live reception, the simulated source, GUI construction, normalization, and
+logging do not require UAV Toolbox. UAV Toolbox remains optional for offline
+`ulogreader` workflows.
+
 ## Required for deployment or HITL
 
 - UAV Toolbox Support Package for PX4 Autopilots

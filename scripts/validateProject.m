@@ -8,6 +8,7 @@ requiredDirectories = [
     "config/vehicles"
     "config/geometries"
     "config/experiments"
+    "config/telemetry"
     "config/schemas"
     "models/quadsim"
     "src/matlab/+vectra"
@@ -29,20 +30,27 @@ requiredFiles = [
     "config/vehicles/main_quad.json"
     "config/geometries/cant_00.json"
     "config/experiments/smoke_hover.json"
+    "config/telemetry/local_udp.json"
+    "config/telemetry/requirements.txt"
+    "apps/VectraTelemetryApp.m"
+    "scripts/installPymavlink.m"
+    "scripts/launchTelemetryApp.m"
+    "scripts/telemetry/pymavlink_bridge.py"
+    "docs/usage/px4-telemetry-gui.md"
     "vendor/quadsim-lock.json"
 ];
 
 missingDirectories = strings(0, 1);
 for index = 1:numel(requiredDirectories)
     if ~isfolder(fullfile(projectRoot, requiredDirectories(index)))
-        missingDirectories(end + 1, 1) = requiredDirectories(index);
+        missingDirectories(end + 1, 1) = requiredDirectories(index); %#ok<AGROW>
     end
 end
 
 missingFiles = strings(0, 1);
 for index = 1:numel(requiredFiles)
     if ~isfile(fullfile(projectRoot, requiredFiles(index)))
-        missingFiles(end + 1, 1) = requiredFiles(index);
+        missingFiles(end + 1, 1) = requiredFiles(index); %#ok<AGROW>
     end
 end
 
@@ -53,7 +61,7 @@ for index = 1:numel(jsonFiles)
     try
         jsondecode(fileread(filename));
     catch
-        invalidJsonFiles(end + 1, 1) = string(filename);
+        invalidJsonFiles(end + 1, 1) = string(filename); %#ok<AGROW>
     end
 end
 

@@ -1,17 +1,31 @@
 # VECTRA Operator Application
 
-The operator application will be implemented after the command-line simulation,
-PX4 logging, synchronization, and analysis paths pass integration tests.
+`VectraTelemetryApp.m` implements the passive PX4 live-telemetry and logging
+console. Launch it through:
 
-Its approved responsibilities are:
+```matlab
+app = launchTelemetryApp();
+```
 
-- select validated vehicle, geometry, and experiment profiles;
-- inspect dependency and Pixhawk connection status;
-- run simulation jobs;
-- display preflight gates without bypassing PX4 safety systems;
-- associate ULog and external-sensor files with a run;
-- visualize normalized simulation and flight data;
-- export versioned analysis reports.
+For a hardware-independent demonstration:
 
-The GUI must call functions in `+vectra`; it must not duplicate simulation,
+```matlab
+app = launchTelemetryApp(Source="simulated", AutoConnect=true);
+```
+
+The current app can:
+
+- select vehicle, geometry, and experiment profiles;
+- inspect the USB adapter, UDP port, project Python, and PyMAVLink dependency;
+- receive passive MAVLink 2 telemetry over UDP;
+- display live state and channel freshness;
+- record immutable source events and normalized samples;
+- recover a manifest after an interrupted recording.
+
+Simulation jobs, offline ULog association, external-sensor synchronization, and
+analysis report export remain separate VECTRA workflows.
+
+The GUI calls functions in `+vectra`; it does not duplicate simulation,
 hardware, parsing, or analysis logic.
+
+See [the usage guide](../docs/usage/px4-telemetry-gui.md).

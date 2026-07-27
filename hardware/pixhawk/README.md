@@ -14,3 +14,8 @@ VECTRA is responsible for:
 
 Actual aircraft commands require manual operator confirmation and a tested
 manual override. Unattended automated tests are restricted to simulation.
+
+The live operator console uses a one-way QGroundControl MAVLink forward on
+`127.0.0.1:14551`; see
+[live-telemetry-setup.md](live-telemetry-setup.md). It does not share
+QGroundControl's `14550` listener and contains no command path.

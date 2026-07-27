@@ -1,0 +1,16 @@
+{
+  "$schema": "../schemas/telemetry.schema.json",
+  "schemaVersion": "1.0.0",
+  "telemetryId": "local-udp-14551",
+  "transport": "udp",
+  "decoder": "pymavlink",
+  "dialect": "common",
+  "localPort": 14551,
+  "pythonExecutable": ".venv/bin/python",
+  "bridgeScript": "scripts/telemetry/pymavlink_bridge.py",
+  "pollPeriodSec": 0.05,
+  "samplePeriodSec": 0.1,
+  "staleAfterSec": 2.5,
+  "lockToFirstPx4Heartbeat": true,
+  "notes": "Toolbox-free passive PyMAVLink 2 listener. Port 14551 avoids QGroundControl's usual 14550 bind; configure one-way forwarding to 127.0.0.1:14551."
+}

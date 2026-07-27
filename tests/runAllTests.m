@@ -5,6 +5,7 @@ testRoot = fileparts(mfilename("fullpath"));
 projectRoot = fileparts(testRoot);
 addpath(fullfile(projectRoot, "src", "matlab"));
 addpath(fullfile(projectRoot, "scripts"));
+addpath(testRoot);
 
 suite = testsuite(testRoot, "IncludeSubfolders", true);
 results = run(suite);

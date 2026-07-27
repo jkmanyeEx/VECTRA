@@ -50,6 +50,31 @@ The completed implementation and validation report is available in
 [`docs/reports/cant-model-implementation-validation-report.pdf`](docs/reports/cant-model-implementation-validation-report.pdf),
 with editable DOCX and Markdown source files in the same directory.
 
+## Live telemetry console
+
+Create the free project-local PyMAVLink environment once:
+
+```matlab
+startup
+installPymavlink()
+```
+
+Then launch the passive PX4 telemetry GUI:
+
+```matlab
+app = launchTelemetryApp();
+```
+
+Or run the complete UI and logger with deterministic simulated data:
+
+```matlab
+app = launchTelemetryApp(Source="simulated", AutoConnect=true);
+```
+
+See the
+[PX4 telemetry GUI usage guide](docs/usage/px4-telemetry-gui.md) for
+QGroundControl forwarding, recording, recovery, and troubleshooting.
+
 ## Project boundaries
 
 - `vendor/QuadSim` is an external dependency and must remain unmodified.

@@ -38,6 +38,35 @@ alignment event.
 PX4 NED, QuadSim body/inertial frames, and any laboratory frame must be
 explicitly transformed before data is marked canonical.
 
+## Live telemetry source columns
+
+The live logger preserves native source fields in `telemetry_events.jsonl` and
+writes the following analysis-facing source columns to
+`telemetry_samples.csv`:
+
+| Variable | Unit | Source and conversion |
+|---|---:|---|
+| `ReceivedUnixSec` | s | local UTC POSIX receive time |
+| `Elapsed_s` | s | elapsed recording time |
+| `SystemID` | — | MAVLink source system |
+| `ComponentID` | — | MAVLink source component |
+| `IsSimulated` | bool | explicit source provenance |
+| `North_m` | m | `LOCAL_POSITION_NED.x` |
+| `East_m` | m | `LOCAL_POSITION_NED.y` |
+| `Down_m` | m | `LOCAL_POSITION_NED.z` |
+| `VNorth_mps` | m/s | `LOCAL_POSITION_NED.vx` |
+| `VEast_mps` | m/s | `LOCAL_POSITION_NED.vy` |
+| `VDown_mps` | m/s | `LOCAL_POSITION_NED.vz` |
+| `X_m` | m | North |
+| `Y_m` | m | East |
+| `Z_m` | m | negative Down |
+| `MotorN_output` | normalized | active `ACTUATOR_OUTPUT_STATUS.actuator[N]` |
+| `MotorN_rpm` | rpm | measured `ESC_TELEMETRY_1_TO_4.rpm[N]` only |
+
+Every live channel also carries a source message, provenance category, update
+rate, last receive time, and freshness state in the in-memory snapshot and
+final manifest. MAVLink sentinel values are represented as missing values.
+
 ## Cant allocation diagnostics
 
 The VECTRA Cant Simulink model records a six-value diagnostic signal separately

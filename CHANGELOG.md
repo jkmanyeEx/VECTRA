@@ -19,3 +19,18 @@
   simulation output, and no motor-limit exceedance.
 - Added the reproducible Cant implementation and validation report in Markdown,
   editable DOCX, and visually verified PDF formats.
+- Added the passive PX4 live-telemetry console with hardware and deterministic
+  simulated sources, channel freshness/provenance, bounded rolling plots, and
+  run-scoped recording controls.
+- Added append-only MAVLink JSONL journals, normalized CSV samples, final
+  manifests, interrupted-run recovery, and telemetry unit/integration tests.
+- Added a hardware prerequisite check and changed the VECTRA listener default
+  to `14551` after the connected QGroundControl process was found to own
+  `14550`.
+- Added the QGroundControl forwarding setup and complete telemetry GUI usage
+  guide.
+- Replaced the paid UAV Toolbox live-receive dependency with a pinned,
+  project-local PyMAVLink bridge while retaining the same passive MATLAB source
+  contract, telemetry monitor, GUI, and raw-data formats.
+- Added a one-command MATLAB installer, dependency/runtime health reporting,
+  and a real MAVLink 2 UDP heartbeat loopback test for the Python bridge.

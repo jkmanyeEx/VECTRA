@@ -5,11 +5,17 @@ classdef TestConfiguration < matlab.unittest.TestCase
             geometry = vectra.config.loadProfile("geometries", "cant_00");
             experiment = vectra.config.loadProfile( ...
                 "experiments", "smoke_hover");
+            telemetry = vectra.config.loadProfile( ...
+                "telemetry", "local_udp");
 
             testCase.verifyEqual(string(vehicle.vehicleId), "rne-quad-01");
             testCase.verifyEqual(geometry.nominalCantAngleDeg, 0);
             testCase.verifyEqual(string(experiment.geometryProfile), ...
                 "cant_00");
+            testCase.verifyEqual(telemetry.localPort, 14551);
+            testCase.verifyEqual(string(telemetry.transport), "udp");
+            testCase.verifyEqual(string(telemetry.decoder), "pymavlink");
+            testCase.verifyEqual(string(telemetry.dialect), "common");
         end
 
         function resolvesRunProvenance(testCase)

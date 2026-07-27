@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAtUtc": "2026-07-27T06:53:19.302Z",
+  "pythonVersion": "Python 3.11.9",
+  "pymavlinkVersion": "2.4.49",
+  "packages": [
+    "fastcrc==0.3.6",
+    "lxml==6.1.1",
+    "pymavlink==2.4.49"
+  ]
+}

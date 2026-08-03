@@ -56,8 +56,8 @@ VALIDATION_RESULT = (
     ROOT / "results" / "reports" / "cant-validation" / "validation-report.json"
 )
 
-ASCII_FONT = "Arial Unicode MS"
-KOREAN_FONT = "Arial Unicode MS"
+ASCII_FONT = "AppleGothic"
+KOREAN_FONT = "AppleGothic"
 MONO_FONT = "Menlo"
 KOREAN_FONT_PATH = Path("/System/Library/Fonts/AppleSDGothicNeo.ttc")
 PDF_KOREAN_FONT_PATH = Path(
@@ -480,6 +480,10 @@ def parse_markdown_body(
         if stripped == "<!-- pagebreak -->":
             flush_paragraph()
             document.add_page_break()
+            index += 1
+            continue
+        if stripped == "<!-- pdf-pagebreak -->":
+            flush_paragraph()
             index += 1
             continue
 
@@ -965,7 +969,8 @@ def add_cover(document: Document) -> None:
     note.paragraph_format.space_after = Pt(0)
     run = note.add_run(
         "이 보고서는 Cant 구현의 타당성을 검증한다. 실제 기체의 최적 cant "
-        "angle이나 효율 향상은 후속 다요인 실험의 연구 질문이다."
+        "angle이나 효율 향상은 기체·프로펠러·질량·무게중심을 고정한 후속 "
+        "cant-angle 실험의 연구 질문이다."
     )
     set_run_font(run, size=10, color=MUTED, italic=True)
     document.add_page_break()
@@ -1238,7 +1243,8 @@ def add_pdf_cover(story: list, styles: dict[str, ParagraphStyle]) -> None:
     story.append(
         Paragraph(
             "이 보고서는 Cant 구현의 타당성을 검증한다. 실제 기체의 최적 "
-            "cant angle이나 효율 향상은 후속 다요인 실험의 연구 질문이다.",
+            "cant angle이나 효율 향상은 기체·프로펠러·질량·무게중심을 "
+            "고정한 후속 cant-angle 실험의 연구 질문이다.",
             styles["caption"],
         )
     )
@@ -1298,7 +1304,7 @@ def parse_pdf_markdown(
     while index < len(lines):
         stripped = lines[index].strip()
 
-        if stripped == "<!-- pagebreak -->":
+        if stripped in {"<!-- pagebreak -->", "<!-- pdf-pagebreak -->"}:
             flush_paragraph()
             story.append(PageBreak())
             index += 1

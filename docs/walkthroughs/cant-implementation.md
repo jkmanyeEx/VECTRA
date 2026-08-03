@@ -103,6 +103,7 @@ stop simulation, and does not change the accepted numerical result.
 5. hover RPM ratio moving toward `1/sqrt(cos(10 deg))`;
 6. finite state output and no motor-limit exceedance.
 
-Full cant sweeps, payload, propeller diameter, disk loading, wind, and
-statistical sensitivity analysis are intentionally deferred to the subsequent
-research experiment.
+The approved cant-angle sweep, wind testing, and statistical sensitivity
+analysis are intentionally deferred to the subsequent research experiment.
+Vehicle configuration, propeller configuration, mass, and center of gravity
+remain fixed.

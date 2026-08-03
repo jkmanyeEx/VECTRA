@@ -39,6 +39,7 @@ quadModel.coordinateFrame = geometry.coordinateFrame;
 quadModel.axisMeaning = geometry.axisMeaning;
 quadModel.geometryId = geometry.geometryId;
 quadModel.geometryRevision = geometry.geometryRevision;
+quadModel.cantType = geometry.cantType;
 quadModel.motorOrder = geometry.motorOrder;
 quadModel.motorPositionsBodyM = geometry.motorPositionsBodyM;
 quadModel.rotorAxesBody = geometry.rotorAxesBody;

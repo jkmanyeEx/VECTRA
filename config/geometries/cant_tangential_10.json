@@ -1,0 +1,26 @@
+{
+  "$schema": "../schemas/geometry.schema.json",
+  "schemaVersion": "1.0.0",
+  "geometryId": "alternating-tangential-cant-10",
+  "geometryRevision": "1",
+  "displayName": "Alternating 10 degree tangential cant",
+  "coordinateFrame": "QUADSIM_BODY_XY_ZUP",
+  "axisMeaning": "FORCE_ON_BODY",
+  "motorOrder": ["M1_POS_X", "M2_POS_Y", "M3_NEG_X", "M4_NEG_Y"],
+  "cantType": "tangential",
+  "nominalCantAngleDeg": 10,
+  "motorCantAnglesDeg": [-10, 10, -10, 10],
+  "motorAzimuthsDeg": [0, 90, 180, -90],
+  "motorPositionsBodyM": null,
+  "customRotorAxesBody": null,
+  "motorSpinDirections": ["CCW", "CW", "CCW", "CW"],
+  "measuredMotorCantAnglesDeg": [null, null, null, null],
+  "measurementUncertaintyDeg": [0, 0, 0, 0],
+  "assumptions": {
+    "centerOfMassFixed": true,
+    "inertiaTensorFixed": true,
+    "rotorAxesSymmetric": true,
+    "equalThrustYawBalanced": true,
+    "tangentialCantAlignedWithReactionTorque": true
+  }
+}

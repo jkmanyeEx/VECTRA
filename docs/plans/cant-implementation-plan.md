@@ -14,9 +14,9 @@ verification is intentionally limited to:
 4. the expected vertical-force loss and hover-RPM increase;
 5. finite execution with visible allocation limits and saved configuration.
 
-Full angle sweeps, mass variation, propeller variation, disk-loading analysis,
-wind, and statistical sensitivity analysis belong to the subsequent research
-experiment.
+The approved cant-angle sweep, wind testing, and statistical sensitivity
+analysis belong to the subsequent research experiment. Vehicle configuration,
+propeller configuration, mass, and center of gravity remain fixed.
 
 ## 1. Objective
 
@@ -338,7 +338,8 @@ The approved Cant MVP is complete only when:
 - blade flapping and rotor-to-rotor aerodynamic interaction;
 - PX4 control-allocation deployment;
 - bound-optimizing allocation at actuator limits;
-- full cant-angle, mass, propeller, and disk-loading sweeps;
+- the approved cant-angle sweep with fixed vehicle, propeller, mass, and
+  center-of-gravity controls;
 - App Designer GUI implementation;
 - real-flight authorization.
 

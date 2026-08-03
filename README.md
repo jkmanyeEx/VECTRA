@@ -42,9 +42,10 @@ runCantValidationLogged()
 
 The cant check compares the pinned upstream model with zero cant, then verifies
 the expected force and hover-RPM direction for the symmetric 10-degree profile.
-It is an implementation check, not the later mass/propeller/disk-loading
-research sweep. The complete console transcript and machine-readable report are
-saved under `results/reports/cant-validation/`.
+It is an implementation check, not the later controlled cant-angle experiment
+with a fixed vehicle, propeller configuration, mass, and center of gravity. The
+complete console transcript and machine-readable report are saved under
+`results/reports/cant-validation/`.
 
 The completed implementation and validation report is available in
 [`docs/reports/cant-model-implementation-validation-report.pdf`](docs/reports/cant-model-implementation-validation-report.pdf),

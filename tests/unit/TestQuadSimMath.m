@@ -29,8 +29,9 @@ classdef TestQuadSimMath < matlab.unittest.TestCase
                 "AbsTol", eps);
         end
 
-        function buildsSymmetricRadialCant(testCase)
-            profile = vectra.config.loadProfile("geometries", "cant_10");
+        function buildsAlternatingTangentialCant(testCase)
+            profile = vectra.config.loadProfile( ...
+                "geometries", "cant_tangential_10");
             arm = 0.25;
             geometry = vectra.quadsim.buildRotorGeometry(profile, arm);
             ct = 2.0e-7;
@@ -39,13 +40,35 @@ classdef TestQuadSimMath < matlab.unittest.TestCase
                 geometry.motorPositionsBodyM, geometry.rotorAxesBody, ...
                 geometry.reactionTorqueSigns, ct, cq);
 
+            sine = sind(10);
+            cosine = cosd(10);
+            expectedAxes = [
+                0, -sine, 0, sine
+                -sine, 0, sine, 0
+                cosine, cosine, cosine, cosine
+            ];
+            expectedYawMagnitude = arm * ct * sine + cq * cosine;
+
             testCase.verifyEqual( ...
                 vecnorm(geometry.rotorAxesBody, 2, 1), ones(1, 4), ...
+                "AbsTol", 1e-12);
+            testCase.verifyEqual(geometry.rotorAxesBody, expectedAxes, ...
                 "AbsTol", 1e-12);
             testCase.verifyEqual(sum(matrix(1:2, :), 2), [0; 0], ...
                 "AbsTol", 1e-20);
             testCase.verifyEqual(matrix(3, :), ...
-                ct * cosd(10) * ones(1, 4), "RelTol", 1e-12);
+                ct * cosine * ones(1, 4), "RelTol", 1e-12);
+            testCase.verifyEqual(sum(matrix(4:6, :), 2), ...
+                zeros(3, 1), "AbsTol", 1e-20);
+            testCase.verifyEqual(matrix(6, :), ...
+                expectedYawMagnitude * [-1, 1, -1, 1], ...
+                "RelTol", 1e-12);
+            testCase.verifyGreaterThan( ...
+                min(abs(matrix(6, :))), cq);
+
+            allocation = vectra.quadsim.buildControlAllocation( ...
+                matrix, arm);
+            testCase.verifyTrue(allocation.fullRank);
         end
 
         function generalizedGyroMatchesLegacyAtZeroCant(testCase)

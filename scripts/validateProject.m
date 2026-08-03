@@ -29,6 +29,7 @@ requiredFiles = [
     "VERSION"
     "config/vehicles/main_quad.json"
     "config/geometries/cant_00.json"
+    "config/geometries/cant_tangential_10.json"
     "config/experiments/smoke_hover.json"
     "config/telemetry/local_udp.json"
     "config/telemetry/requirements.txt"

@@ -90,6 +90,7 @@ The telemetry tests cover:
 - sequence-gap counting;
 - attitude, rate, NED position, altitude, battery, GPS, actuator, RPM, target,
   and estimator-wind normalization;
+- raw `SERVO_OUTPUT_RAW` PWM fallback without assumed normalization;
 - sentinel-to-missing conversions;
 - quaternion target conversion;
 - live-to-stale transitions;

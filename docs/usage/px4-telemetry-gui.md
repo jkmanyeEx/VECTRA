@@ -197,11 +197,29 @@ field.
 - Use QGroundControl's MAVLink Inspector to verify `HEARTBEAT`.
 - Check local firewall rules without disabling system security.
 
+### Heartbeat is live but every aircraft channel stays `waiting`
+
+Older VECTRA builds could lock to QGroundControl's own
+`SYS 255 / COMP 190` heartbeat when it arrived before the aircraft heartbeat.
+The current monitor ignores that GCS heartbeat and waits for a heartbeat whose
+autopilot field identifies PX4. The aircraft system ID is commonly `1`, but it
+is not hardcoded.
+
+Restart the listener after updating VECTRA. The vehicle badge must identify the
+aircraft rather than remain on `SYS 255 / COMP 190`. If all other channels
+still wait, verify in MAVLink Inspector that the forwarded stream contains the
+corresponding aircraft messages.
+
 ### Attitude is live but actuator or RPM remains missing
 
 The vehicle may not stream those message types on the active link. Confirm
-`ACTUATOR_OUTPUT_STATUS` or `ESC_TELEMETRY_1_TO_4` in MAVLink Inspector.
-VECTRA intentionally does not send message-interval requests in this release.
+`ACTUATOR_OUTPUT_STATUS`, `SERVO_OUTPUT_RAW`, or
+`ESC_TELEMETRY_1_TO_4` in MAVLink Inspector. The output chart always displays
+raw `SERVO_OUTPUT_RAW` PWM microseconds on a fixed scale; normalized
+`ACTUATOR_OUTPUT_STATUS` values remain available in recorded data but never
+change the chart mode. The chart labels physical output channels because
+motor-to-output assignment is airframe configuration. VECTRA intentionally
+does not send message-interval requests.
 
 ### GUI closes during recording
 

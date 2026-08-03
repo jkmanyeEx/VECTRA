@@ -61,11 +61,15 @@ writes the following analysis-facing source columns to
 | `Y_m` | m | East |
 | `Z_m` | m | negative Down |
 | `MotorN_output` | normalized | active `ACTUATOR_OUTPUT_STATUS.actuator[N]` |
+| `MotorOutputPort` | — | `SERVO_OUTPUT_RAW.port`; Pixhawk uses 0 for MAIN and 1 for AUX |
+| `MotorN_pwm_us` | µs | raw physical output from `SERVO_OUTPUT_RAW.servoN_raw` |
 | `MotorN_rpm` | rpm | measured `ESC_TELEMETRY_1_TO_4.rpm[N]` only |
 
 Every live channel also carries a source message, provenance category, update
 rate, last receive time, and freshness state in the in-memory snapshot and
 final manifest. MAVLink sentinel values are represented as missing values.
+Raw PWM is never silently converted to normalized demand. Confirm the PX4
+actuator assignment before interpreting output channels as motor numbers.
 
 ## Cant allocation diagnostics
 

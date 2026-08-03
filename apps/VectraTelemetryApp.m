@@ -319,14 +319,18 @@ classdef VectraTelemetryApp < handle
                 Color="none", Box="off");
 
             app.MotorAxes = app.makeAxes(grid, ...
-                3, 2, "MOTOR OUTPUTS", "normalized");
+                3, 2, "PWM OUTPUTS 1–4", "PWM µs");
             app.MotorBars = bar(app.MotorAxes, 1:4, zeros(1, 4), ...
                 FaceColor=app.Accent, ...
                 EdgeColor="none", ...
                 FaceAlpha=0.85);
+            app.MotorBars.BaseValue = 900;
             app.MotorAxes.XTick = 1:4;
-            app.MotorAxes.XTickLabel = ["M1", "M2", "M3", "M4"];
-            app.MotorAxes.YLim = [-1, 1];
+            app.MotorAxes.XTickLabel = [ ...
+                "OUT 1", "OUT 2", "OUT 3", "OUT 4"];
+            xlabel(app.MotorAxes, "");
+            app.MotorAxes.YLim = [900, 2100];
+            app.MotorAxes.YTick = 1000:250:2000;
         end
 
         function buildQualityPanel(app, root)
@@ -781,7 +785,7 @@ classdef VectraTelemetryApp < handle
             outputs = NaN(1, 4);
             for index = 1:4
                 outputs(index) = snapshot.data.( ...
-                    sprintf("Motor%d_output", index));
+                    sprintf("Motor%d_pwm_us", index));
             end
             app.MotorBars.YData = outputs;
         end

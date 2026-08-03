@@ -100,7 +100,7 @@ classdef LiveTelemetryLogger < handle
             stoppedUnixSec = posixtime(datetime( ...
                 "now", "TimeZone", "UTC"));
             manifest = struct( ...
-                "schemaVersion", "1.0.0", ...
+                "schemaVersion", "1.1.0", ...
                 "runId", this.RunId, ...
                 "startedAtUtc", isoTime(this.StartedUnixSec), ...
                 "stoppedAtUtc", isoTime(stoppedUnixSec), ...
@@ -193,10 +193,15 @@ classdef LiveTelemetryLogger < handle
                 data.BatteryRemaining_pct
                 data.GpsFixType
                 data.GpsSatellites
+                data.MotorOutputPort
             ];
             for index = 1:4
                 values(end + 1, 1) = data.( ...
                     sprintf("Motor%d_output", index)); %#ok<AGROW>
+            end
+            for index = 1:4
+                values(end + 1, 1) = data.( ...
+                    sprintf("Motor%d_pwm_us", index)); %#ok<AGROW>
             end
             for index = 1:4
                 values(end + 1, 1) = data.( ...
@@ -244,10 +249,15 @@ names = [ ...
     "BatteryRemaining_pct"
     "GpsFixType"
     "GpsSatellites"
+    "MotorOutputPort"
     "Motor1_output"
     "Motor2_output"
     "Motor3_output"
     "Motor4_output"
+    "Motor1_pwm_us"
+    "Motor2_pwm_us"
+    "Motor3_pwm_us"
+    "Motor4_pwm_us"
     "Motor1_rpm"
     "Motor2_rpm"
     "Motor3_rpm"

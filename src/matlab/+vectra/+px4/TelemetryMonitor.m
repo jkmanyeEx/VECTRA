@@ -8,6 +8,7 @@ classdef TelemetryMonitor < handle
         TotalMessages uint64 = 0
         AcceptedMessages uint64 = 0
         ForeignMessages uint64 = 0
+        RejectedLockHeartbeats uint64 = 0
         SequenceGaps uint64 = 0
         DecodeErrors uint64 = 0
     end
@@ -33,6 +34,7 @@ classdef TelemetryMonitor < handle
             this.TotalMessages = 0;
             this.AcceptedMessages = 0;
             this.ForeignMessages = 0;
+            this.RejectedLockHeartbeats = 0;
             this.SequenceGaps = 0;
             this.DecodeErrors = 0;
             remove(this.LastSequence, keys(this.LastSequence));
@@ -46,6 +48,11 @@ classdef TelemetryMonitor < handle
             name = upper(string(event.MessageName));
             if isnan(this.LockedSystemID)
                 if name ~= "HEARTBEAT"
+                    return;
+                end
+                if ~isPx4VehicleHeartbeat(event)
+                    this.RejectedLockHeartbeats = ...
+                        this.RejectedLockHeartbeats + 1;
                     return;
                 end
                 this.LockedSystemID = double(event.SystemID);
@@ -153,9 +160,26 @@ classdef TelemetryMonitor < handle
                 "totalMessages", this.TotalMessages, ...
                 "acceptedMessages", this.AcceptedMessages, ...
                 "foreignMessages", this.ForeignMessages, ...
+                "rejectedLockHeartbeats", ...
+                    this.RejectedLockHeartbeats, ...
                 "sequenceGaps", this.SequenceGaps, ...
                 "decodeErrors", this.DecodeErrors, ...
                 "messageCounts", counts);
         end
     end
+end
+
+function valid = isPx4VehicleHeartbeat(event)
+%ISPX4VEHICLEHEARTBEAT Reject forwarded GCS heartbeats as lock candidates.
+
+valid = false;
+if ~isfield(event, "Payload") || ~isstruct(event.Payload) || ...
+        ~isfield(event.Payload, "autopilot")
+    return;
+end
+
+autopilot = double(event.Payload.autopilot);
+mavAutopilotPx4 = 12;
+valid = isscalar(autopilot) && isfinite(autopilot) && ...
+    autopilot == mavAutopilotPx4;
 end

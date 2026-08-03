@@ -76,6 +76,22 @@ switch name
             end
         end
 
+    case "SERVO_OUTPUT_RAW"
+        port = readScalar(payload, "port");
+        if ~isfinite(port)
+            port = 0;
+        end
+        snapshot.data.MotorOutputPort = port;
+        for index = 1:16
+            fieldName = sprintf("servo%d_raw", index);
+            value = readScalar(payload, fieldName);
+            if ~isfinite(value) || value <= 0 || value == 65535
+                value = NaN;
+            end
+            snapshot.data.(sprintf( ...
+                "Motor%d_pwm_us", index)) = value;
+        end
+
     case "GPS_RAW_INT"
         snapshot.data.GpsFixType = readScalar(payload, "fix_type");
         snapshot.data.GpsSatellites = unknownToNaN( ...
@@ -117,7 +133,12 @@ switch name
 end
 
 definitions = vectra.px4.telemetryDefinitions();
-match = find(string({definitions.messageName}) == name, 1, "first");
+matches = false(1, numel(definitions));
+for definitionIndex = 1:numel(definitions)
+    matches(definitionIndex) = any(string( ...
+        definitions(definitionIndex).acceptedMessageNames) == name);
+end
+match = find(matches, 1, "first");
 if isempty(match)
     return;
 end
@@ -126,6 +147,7 @@ key = definitions(match).key;
 channel = snapshot.channels.(key);
 previousReceived = channel.lastReceivedUnixSec;
 channel.count = channel.count + 1;
+channel.messageName = name;
 channel.lastReceivedUnixSec = received;
 channel.ageSec = 0;
 channel.state = "live";

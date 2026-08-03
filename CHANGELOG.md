@@ -34,3 +34,9 @@
   contract, telemetry monitor, GUI, and raw-data formats.
 - Added a one-command MATLAB installer, dependency/runtime health reporting,
   and a real MAVLink 2 UDP heartbeat loopback test for the Python bridge.
+- Added a `SERVO_OUTPUT_RAW` compatibility path for PX4 builds that do not
+  expose `ACTUATOR_OUTPUT_STATUS`, preserving PWM microseconds in snapshots,
+  CSV logs, channel provenance, and the unit-aware output chart.
+- Prevented QGroundControl's `SYS 255 / COMP 190` GCS heartbeat from winning
+  the telemetry source-lock race; VECTRA now waits for a PX4 autopilot
+  heartbeat before accepting a vehicle system ID.
